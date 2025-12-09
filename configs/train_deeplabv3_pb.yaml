@@ -1,0 +1,41 @@
+# configs/train_deeplabv3_pb.yaml
+seed: 42
+
+# data
+meta_dir: "data/meta"
+train_list: "data/meta/train_tiles.txt"
+val_list:   "data/meta/val_tiles.txt"
+mean_npy:   "data/meta/mean.npy"
+std_npy:    "data/meta/std.npy"
+img_tiles_dir: "data/tiles/images_npy"
+mask_tiles_dir: "data/tiles/masks_npy"
+
+# model
+num_classes: 6    # 0:background,1..4:roof types,5:water
+backbone: "resnet50"
+pretrained_backbone: true
+
+# training
+device: "cuda"
+batch_size: 4
+num_workers: 4
+epochs: 30
+optimizer:
+  name: "AdamW"
+  lr: 1e-4
+  weight_decay: 1e-5
+scheduler:
+  name: "CosineAnnealingLR"
+  T_max: 80
+
+# loss
+loss_alpha_dice: 0.5
+
+# checkpoints
+checkpoints_dir: "models"
+checkpoint_best_name: "deeplabv3_pb_best.pth"
+checkpoint_last_name: "deeplabv3_pb_last.pth"
+log_every_batches: 20
+
+# debugging
+max_batches_debug: 0     # set >0 to run limited batches for quick smoke test

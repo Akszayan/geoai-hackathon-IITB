@@ -1,0 +1,8 @@
+{
+    "background": 0,
+    "roof_RCC": 1,
+    "roof_Tiled": 2,
+    "roof_Tin": 3,
+    "roof_Other": 4,
+    "water": 5
+}

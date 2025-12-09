@@ -1,0 +1,28 @@
+paths:
+  manifest_csv: "outputs/manifests/full_manifest_streamed.csv"
+  mask_root: "F:/theme1_masks/masks_streamed"
+  checkpoint_dir: "outputs/checkpoints"
+
+tile_size: 512
+bands: [1,2,3]
+
+model:
+  backbone: "mobilenet_v3_large"
+  pretrained_backbone: true
+  num_classes: 15
+
+train:
+  batch_size: 8
+  num_workers: 4
+  epochs: 8
+  learning_rate: 1.5e-4
+  weight_decay: 1e-4
+  val_fraction: 0.15
+  resume: false
+  class_weights: null
+  min_mask_coverage: 0.0
+  target_train_tiles: 2000
+  target_val_tiles: 500
+
+split:
+  method: "random"
