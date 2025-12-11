@@ -7,10 +7,20 @@
 ## **🏅 Team Information**
 
 **Team Name:** AeroMappers
+
 **Team ID:** Nati-250309
 ---
 
 ## **📌 Badges**
+
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.5-orange)
+![DeepLabV3](https://img.shields.io/badge/Model-DeepLabV3--ResNet50-green)
+![CUDA](https://img.shields.io/badge/CUDA-12.1-success)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+![Dataset: PB District](https://img.shields.io/badge/Dataset-Punjab%20(PB)-brightgreen)
+![Hackathon](https://img.shields.io/badge/National%20GeoAI%20Hackathon-2025-red)
+
 
 ---
 
@@ -157,3 +167,4 @@ Released under the **MIT License**.
 This project is developed for the **National Geo-AI Hackathon 2025** organized under Techfest IITB.
 
 ---
+
