@@ -1,34 +1,185 @@
-# GeoAI Hackathon — Theme 1: Drone Imagery Feature Extraction  
-### DeepLabV3 + ResNet50 Segmentation Pipeline (PB District)
+# **GeoAI Hackathon — Theme 1: Drone Imagery Feature Extraction**
 
-This repository contains the complete codebase used by our team for **Round-1** of the  
-**National Geo-AI Hackathon (Theme 1)** — Feature Extraction from Drone Imagery.
+### **DeepLabV3-ResNet50 Semantic Segmentation Pipeline (Punjab District)**
 
-We built a **6-class semantic segmentation model** capable of extracting:
-
-- 🏠 **Building footprints & roof types (1–4)**  
-- 💧 **Water bodies**  
-- 🌾 Background land (class 0)
-
-This approach is fully GIS-compatible and produces **raster masks + polygon vectors** for mapping.
+![Pipeline Overview](https://dummyimage.com/1200x260/1a1a1a/ffffff\&text=GeoAI+Feature+Extraction+Pipeline)
 
 ---
 
-## 🚀 Overview
+## **🏅 Team Information**
 
-We trained a DeepLabV3-ResNet50 model on the PB district orthophotos using:
-
-- Tiled data (`512×512`, stride 256)
-- Cleaned roof polygons from SHP files  
-- Rasterized masks generated per tile  
-- DeepLabV3-ResNet50 (ImageNet backbone)
-- Mixed precision training (AMP)
-- Cosine LR schedule  
-- Resume-safe training loop  
-
-Final validation mIoU ~ **0.56** after 30 epochs.
+**Team Name:** AeroMappers
+**Team ID:** Nati-250309
+**Institution:** SASTRA Deemed University
+**Team Lead:** Akszayan V L
 
 ---
 
-## 📂 Repository Structure
+## **📌 Badges**
 
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.5-orange)
+![DeepLabV3](https://img.shields.io/badge/Model-DeepLabV3--ResNet50-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+![Dataset: PB District](https://img.shields.io/badge/Dataset-Punjab%20\(PB\)-brightgreen)
+
+---
+
+# **1. Overview**
+
+This repository contains the full codebase developed for **Round‑1** of the **National Geo-AI Hackathon 2025 (Theme 1)** — *Automated Feature Extraction from Drone Imagery*.
+
+We built a **6‑class semantic segmentation model** capable of extracting:
+
+* Building footprints
+* Roof‑material classes (Roof_type 1–4)
+* Water bodies
+* Background land (class 0)
+
+The output is a fully GIS-compatible set of **raster masks** and **polygon vectors**, validated using QGIS.
+
+![Sample Segmentation](https://dummyimage.com/1200x400/333333/ffffff\&text=Sample+DeepLabV3+Segmentation+Overlay)
+
+---
+
+# **2. Pipeline Summary**
+
+![Pipeline Diagram](https://dummyimage.com/1200x360/222222/ffffff\&text=Ortho+→+Tiles+→+Model+→+Mask+→+Polygons+→+QGIS)
+
+### **Core Stages**
+
+1. **Shapefile cleaning + reprojection (EPSG:32643)**
+2. **Raster mask generation (6 classes)**
+3. **512×512 tile creation** for ortho + masks
+4. **DeepLabV3-ResNet50 training** (ImageNet backbone, AMP enabled)
+5. **Full‑ortho inference with tiling**
+6. **Polygonization + area-based cleanup**
+7. **QGIS overlay verification**
+
+---
+
+# **3. Repository Structure**
+
+```
+geoai-hackathon-IITB/
+│
+├── raw_data/                     # Orthos + shapefiles (PB)
+│   ├── orthos/
+│   └── shp/
+│
+├── data/
+│   └── meta/                     # train_tiles.txt, val_tiles.txt
+│
+├── scripts/
+│   ├── generate_tiles_npy.py     # Create .npy tiles
+│   ├── train_deeplabv3_resumable.py
+│   ├── infer_full_ortho.py       # Predict full orthomosaics
+│   ├── polygonize_mask.py
+│   ├── postprocess_polygons.py
+│   └── visualize_overlay.py
+│
+├── models/
+│   ├── deeplabv3_pb_best.pth     # Best model
+│   └── deeplabv3_pb_last.pth
+│
+├── outputs/
+│   ├── predictions/              # Full-ortho prediction masks
+│   ├── vectors/                  # Raw polygons
+│   ├── vectors_clean/            # Cleaned polygons
+│   └── figs/                     # Visual overlays
+│
+├── configs/
+│   └── train_deeplabv3_pb.yaml   # Training configuration
+│
+├── README.md
+├── .gitignore
+├── requirements.txt
+└── LICENSE
+```
+
+---
+
+# **4. Model Details**
+
+### **Model:** DeepLabV3 + ResNet50 backbone
+
+* ASPP module for multi‑scale context
+* Pretrained on ImageNet
+* Fine‑tuned for **6 output classes**
+
+### **Training Setup**
+
+| Component | Value             |
+| --------- | ----------------- |
+| Loss      | Cross‑entropy     |
+| Optimizer | AdamW (lr: 1e‑4)  |
+| Scheduler | CosineAnnealingLR |
+| AMP       | Enabled           |
+| Epochs    | 30                |
+| GPU       | RTX 4060 Laptop   |
+
+### **Validation Performance**
+
+| Class    | IoU        |
+| -------- | ---------- |
+| Roof 1   | 0.845      |
+| Roof 2   | 0.763      |
+| Roof 3   | 0.322      |
+| Roof 4   | 0.610      |
+| Water    | 0.546      |
+| **mIoU** | **0.5583** |
+
+---
+
+# **5. Usage**
+
+### **Training**
+
+```
+python scripts/train_deeplabv3_resumable.py --config configs/train_deeplabv3_pb.yaml
+```
+
+### **Inference on full orthomosaic**
+
+```
+python scripts/infer_full_ortho.py \
+  --ortho <path_to_ortho> \
+  --checkpoint models/deeplabv3_pb_best.pth \
+  --out outputs/predictions/ \
+  --device cuda
+```
+
+### **Polygonization**
+
+```
+python scripts/polygonize_mask.py --mask <pred_mask.tif> --out outputs/vectors/
+```
+
+---
+
+# **6. Output Examples**
+
+![Overlay Nadala](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Nadala+Overlay+Prediction)
+![Overlay Timmowal](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Timmowal+Overlay+Prediction)
+![Overlay Live Demo](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Anaitpura+Live+Demo+Prediction)
+
+---
+
+# **7. License**
+
+Released under the **MIT License**.
+
+---
+
+# **8. Acknowledgements**
+
+This project is developed for the **National Geo-AI Hackathon 2025** organized under the National Geospatial Programme.
+
+---
+
+If you'd like, I can create:
+
+* A cleaner **minimal version**
+* A more visual **research-style README**
+* A version with **model architecture diagrams**
+* A GitHub banner image to upload at the top
