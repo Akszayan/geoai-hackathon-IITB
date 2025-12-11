@@ -10,8 +10,6 @@
 
 **Team Name:** AeroMappers
 **Team ID:** Nati-250309
-**Institution:** SASTRA Deemed University
-**Team Lead:** Akszayan V L
 
 ---
 
@@ -25,7 +23,7 @@
 
 ---
 
-# **1. Overview**
+# ** Overview**
 
 This repository contains the full codebase developed for **Round‑1** of the **National Geo-AI Hackathon 2025 (Theme 1)** — *Automated Feature Extraction from Drone Imagery*.
 
@@ -36,13 +34,10 @@ We built a **6‑class semantic segmentation model** capable of extracting:
 * Water bodies
 * Background land (class 0)
 
-The output is a fully GIS-compatible set of **raster masks** and **polygon vectors**, validated using QGIS.
-
-![Sample Segmentation](https://dummyimage.com/1200x400/333333/ffffff\&text=Sample+DeepLabV3+Segmentation+Overlay)
 
 ---
 
-# **2. Pipeline Summary**
+# ** Pipeline Summary**
 
 ![Pipeline Diagram](https://dummyimage.com/1200x360/222222/ffffff\&text=Ortho+→+Tiles+→+Model+→+Mask+→+Polygons+→+QGIS)
 
@@ -58,7 +53,7 @@ The output is a fully GIS-compatible set of **raster masks** and **polygon vecto
 
 ---
 
-# **3. Repository Structure**
+# ** Repository Structure**
 
 ```
 geoai-hackathon-IITB/
@@ -99,7 +94,7 @@ geoai-hackathon-IITB/
 
 ---
 
-# **4. Model Details**
+# ** Model Details**
 
 ### **Model:** DeepLabV3 + ResNet50 backbone
 
@@ -157,29 +152,16 @@ python scripts/polygonize_mask.py --mask <pred_mask.tif> --out outputs/vectors/
 
 ---
 
-# **6. Output Examples**
 
-![Overlay Nadala](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Nadala+Overlay+Prediction)
-![Overlay Timmowal](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Timmowal+Overlay+Prediction)
-![Overlay Live Demo](https://dummyimage.com/1200x420/3d3d3d/ffffff\&text=Anaitpura+Live+Demo+Prediction)
-
----
-
-# **7. License**
+# ** License**
 
 Released under the **MIT License**.
 
 ---
 
-# **8. Acknowledgements**
+# ** Acknowledgements**
 
-This project is developed for the **National Geo-AI Hackathon 2025** organized under the National Geospatial Programme.
+This project is developed for the **National Geo-AI Hackathon 2025** organized under IITB Techfest.
 
 ---
 
-If you'd like, I can create:
-
-* A cleaner **minimal version**
-* A more visual **research-style README**
-* A version with **model architecture diagrams**
-* A GitHub banner image to upload at the top
