@@ -2,28 +2,19 @@
 
 ### **DeepLabV3-ResNet50 Semantic Segmentation Pipeline (Punjab District)**
 
-![Pipeline Overview](https://dummyimage.com/1200x260/1a1a1a/ffffff\&text=GeoAI+Feature+Extraction+Pipeline)
-
 ---
 
 ## **🏅 Team Information**
 
 **Team Name:** AeroMappers
 **Team ID:** Nati-250309
-
 ---
 
 ## **📌 Badges**
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.5-orange)
-![DeepLabV3](https://img.shields.io/badge/Model-DeepLabV3--ResNet50-green)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
-![Dataset: PB District](https://img.shields.io/badge/Dataset-Punjab%20\(PB\)-brightgreen)
-
 ---
 
-# ** Overview**
+# **1. Overview**
 
 This repository contains the full codebase developed for **Round‑1** of the **National Geo-AI Hackathon 2025 (Theme 1)** — *Automated Feature Extraction from Drone Imagery*.
 
@@ -34,12 +25,11 @@ We built a **6‑class semantic segmentation model** capable of extracting:
 * Water bodies
 * Background land (class 0)
 
+The output is a fully GIS-compatible set of **raster masks** and **polygon vectors**, validated using QGIS.
 
 ---
 
-# ** Pipeline Summary**
-
-![Pipeline Diagram](https://dummyimage.com/1200x360/222222/ffffff\&text=Ortho+→+Tiles+→+Model+→+Mask+→+Polygons+→+QGIS)
+# **2. Pipeline Summary**
 
 ### **Core Stages**
 
@@ -53,7 +43,7 @@ We built a **6‑class semantic segmentation model** capable of extracting:
 
 ---
 
-# ** Repository Structure**
+# **3. Repository Structure**
 
 ```
 geoai-hackathon-IITB/
@@ -94,7 +84,7 @@ geoai-hackathon-IITB/
 
 ---
 
-# ** Model Details**
+# **4. Model Details**
 
 ### **Model:** DeepLabV3 + ResNet50 backbone
 
@@ -152,16 +142,18 @@ python scripts/polygonize_mask.py --mask <pred_mask.tif> --out outputs/vectors/
 
 ---
 
+# **6. Output Examples**
 
-# ** License**
+---
+
+# **7. License**
 
 Released under the **MIT License**.
 
 ---
 
-# ** Acknowledgements**
+# **8. Acknowledgements**
 
-This project is developed for the **National Geo-AI Hackathon 2025** organized under IITB Techfest.
+This project is developed for the **National Geo-AI Hackathon 2025** organized under Techfest IITB.
 
 ---
-
