@@ -6,9 +6,7 @@
 
 ## **🏅 Team Information**
 
-**Team Name:** AeroMappers
-
-**Team ID:** Nati-250309
+**Team Name:** AeroMappers        **Team ID:** Nati-250309
 ---
 
 ## **📌 Badges**
@@ -167,4 +165,5 @@ Released under the **MIT License**.
 This project is developed for the **National Geo-AI Hackathon 2025** organized under Techfest IITB.
 
 ---
+
 
